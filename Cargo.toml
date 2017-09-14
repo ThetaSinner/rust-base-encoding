@@ -1,0 +1,6 @@
+[package]
+name = "base-encoding"
+version = "0.1.0"
+authors = ["ThetaSinner <greatdjonfire@hotmail.co.uk>"]
+
+[dependencies]
