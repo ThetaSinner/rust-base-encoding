@@ -25,7 +25,29 @@ const BASE_64_URL_ALPHABET: [u8; 64] = [
 const BASE_64_URL_MASK: u8 = 0x3F;
 
 pub fn base64url(input: &str) -> Vec<u8> {
-    input.as_bytes().chunks(4).map(|x| {
+    let padded_input = match input.len() % 4 {
+        0 => {
+            String::from(input)
+        },
+        1 => {
+            panic!("bad input");
+        },
+        2 => {
+            let mut s = String::from(input);
+            s.push_str("==");
+            s
+        },
+        3 => {
+            let mut s = String::from(input);
+            s.push_str("=");
+            s
+        },
+        _ => {
+            unreachable!("mod 4");
+        }
+    };
+
+    padded_input.as_bytes().chunks(4).map(|x| {
         if x[2] == b'=' && x[3] == b'=' {
             let buf: u32 = 
                 (((lookup(x[0]).unwrap() & BASE_64_URL_MASK) as u32) << 18) +

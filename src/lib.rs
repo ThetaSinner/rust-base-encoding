@@ -114,6 +114,21 @@ mod tests {
         assert_eq!(String::from("foobar"), String::from_utf8(decode::base64(result.as_str())).unwrap());
     }
 
+    // base64 no padding
+    #[test]
+    fn base_64_section_10_example_5_no_padding() {
+        let result = String::from("Zm9vYg");
+
+        assert_eq!(String::from("foob"), String::from_utf8(decode::base64(result.as_str())).unwrap());
+    }
+
+    #[test]
+    fn base_64_section_10_example_6_no_padding() {
+        let result = String::from("Zm9vYmE");
+
+        assert_eq!(String::from("fooba"), String::from_utf8(decode::base64(result.as_str())).unwrap());
+    }
+
     // base64url
     #[test]
     fn base_64_url_section_9_example_1() {
@@ -203,5 +218,20 @@ mod tests {
         assert_eq!(String::from("Zm9vYmFy"), result);
 
         assert_eq!(String::from("foobar"), String::from_utf8(decode::base64url(result.as_str())).unwrap());
+    }
+
+    // base64url no padding
+    #[test]
+    fn base_64_url_section_10_example_5_no_padding() {
+        let result = String::from("Zm9vYg");
+
+        assert_eq!(String::from("foob"), String::from_utf8(decode::base64url(result.as_str())).unwrap());
+    }
+
+    #[test]
+    fn base_64_url_section_10_example_6_no_padding() {
+        let result = String::from("Zm9vYmE");
+
+        assert_eq!(String::from("fooba"), String::from_utf8(decode::base64url(result.as_str())).unwrap());
     }
 }
