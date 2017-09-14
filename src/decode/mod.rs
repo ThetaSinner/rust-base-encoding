@@ -16,5 +16,7 @@
 // along with base-encoding. If not, see <http://www.gnu.org/licenses/>.
 
 mod base64;
+mod base64url;
 
 pub use self::base64::base64;
+pub use self::base64url::base64url;
