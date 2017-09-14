@@ -21,7 +21,7 @@ pub mod decode;
 #[cfg(test)]
 mod tests {
     use super::encode;
-    // use super::decode;
+    use super::decode;
 
     #[test]
     fn base_64_section_9_example_1() {
@@ -29,7 +29,7 @@ mod tests {
 
         assert_eq!(String::from("FPucA9l+"), result);
 
-        // assert_eq!(&[0x14, 0xfb, 0x9c, 0x3, 0xd9, 0x7e], decode::base64(result.as_str()).as_slice());
+        assert_eq!(&[0x14, 0xfb, 0x9c, 0x3, 0xd9, 0x7e], decode::base64(result.as_str()).as_slice());
     }
 
     #[test]
@@ -37,6 +37,8 @@ mod tests {
         let result = encode::base64(&[0x14, 0xfb, 0x9c, 0x3, 0xd9]);
 
         assert_eq!(String::from("FPucA9k="), result);
+
+        assert_eq!(&[0x14, 0xfb, 0x9c, 0x3, 0xd9], decode::base64(result.as_str()).as_slice());
     }
 
     #[test]
@@ -44,6 +46,8 @@ mod tests {
         let result = encode::base64(&[0x14, 0xfb, 0x9c, 0x3]);
 
         assert_eq!(String::from("FPucAw=="), result);
+
+        assert_eq!(&[0x14, 0xfb, 0x9c, 0x3], decode::base64(result.as_str()).as_slice());
     }
 
     #[test]
@@ -51,6 +55,8 @@ mod tests {
         let result = encode::base64(String::from("").as_bytes());
 
         assert_eq!(String::from(""), result);
+
+        assert_eq!(0, decode::base64(result.as_str()).as_slice().len());
     }
 
     #[test]
@@ -58,6 +64,8 @@ mod tests {
         let result = encode::base64(String::from("f").as_bytes());
 
         assert_eq!(String::from("Zg=="), result);
+
+        assert_eq!(String::from("f"), String::from_utf8(decode::base64(result.as_str())).unwrap());
     }
 
     #[test]
@@ -65,6 +73,8 @@ mod tests {
         let result = encode::base64(String::from("fo").as_bytes());
 
         assert_eq!(String::from("Zm8="), result);
+
+        assert_eq!(String::from("fo"), String::from_utf8(decode::base64(result.as_str())).unwrap());
     }
 
     #[test]
@@ -72,6 +82,8 @@ mod tests {
         let result = encode::base64(String::from("foo").as_bytes());
 
         assert_eq!(String::from("Zm9v"), result);
+
+        assert_eq!(String::from("foo"), String::from_utf8(decode::base64(result.as_str())).unwrap());
     }
 
     #[test]
@@ -79,6 +91,8 @@ mod tests {
         let result = encode::base64(String::from("foob").as_bytes());
 
         assert_eq!(String::from("Zm9vYg=="), result);
+
+        assert_eq!(String::from("foob"), String::from_utf8(decode::base64(result.as_str())).unwrap());
     }
 
     #[test]
@@ -86,6 +100,8 @@ mod tests {
         let result = encode::base64(String::from("fooba").as_bytes());
 
         assert_eq!(String::from("Zm9vYmE="), result);
+
+        assert_eq!(String::from("fooba"), String::from_utf8(decode::base64(result.as_str())).unwrap());
     }
 
     #[test]
@@ -93,5 +109,7 @@ mod tests {
         let result = encode::base64(String::from("foobar").as_bytes());
 
         assert_eq!(String::from("Zm9vYmFy"), result);
+
+        assert_eq!(String::from("foobar"), String::from_utf8(decode::base64(result.as_str())).unwrap());
     }
 }
