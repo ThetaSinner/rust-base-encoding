@@ -1,6 +1,14 @@
 [package]
 name = "base-encoding"
+description = "A rust implementation of rfc-4648"
+repository = "https://github.com/ThetaSinner/rust-base-encoding"
 version = "0.1.0"
 authors = ["ThetaSinner <greatdjonfire@hotmail.co.uk>"]
+keywords = ["rfc-4648"]
+license = "GPL-3.0"
+
+[badges]
+travis-ci = { repository = "ThetaSinner/rust-base-encoding", branch = "master" }
+maintenance = { status = "experimental" }
 
 [dependencies]
